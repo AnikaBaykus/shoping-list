@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  width: 24px;
+  height: 24px;
+
+  align-items: center;
+  justify-content: center;
+
+  outline: var(--outlineColor);
+  border: var(--borderColor);
+
+  cursor: pointer;
+
+  @media screen and (min-width: 1200px) {
+    max-width: 1024px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.done {
+  &:hover,
+  &:focus {
+    outline: 2px solid greenyellow;
+  }
+}
+.delete {
+}
+.add {
+}
+.exit {
+}

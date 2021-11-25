@@ -1,0 +1,11 @@
+.list {
+  @media screen and (min-width: 768px) {
+    margin: -8px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin: -12px;
+  }
+}
