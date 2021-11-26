@@ -13,6 +13,10 @@
   --nameCardColor: #242424;
   --borderColor: 2px solid #f2ece4;
   --outlineColor: 2px solid hsl(0, 0%, 100%);
+  --smoothTransition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --btnHover: linear-gradient(90.9deg, #896d4d 0.77%, #cdb79c 100.82%);
+  --BtnShadow: 0px 14px 34px rgba(0, 0, 0, 0.25);
+  --outlineHover: #896d4d;
 }
 
 body {

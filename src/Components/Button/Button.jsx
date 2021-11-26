@@ -1,11 +1,16 @@
 import React from 'react';
+import cn from 'classnames';
 import PropTypes from 'prop-types';
 import s from './Button.module.scss';
 
-const Button = ({ children }) => {
+const Button = ({ children, className, onClickButton }) => {
   return (
     <>
-      <button className={s.button} type="button">
+      <button
+        onClick={onClickButton}
+        className={cn(className, s.button)}
+        type="button"
+      >
         {children}
       </button>
     </>

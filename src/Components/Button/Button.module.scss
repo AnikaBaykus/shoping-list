@@ -10,23 +10,25 @@
   border: var(--borderColor);
 
   cursor: pointer;
+  transition: color outline border var(--smoothTransition);
+
+  svg {
+    width: 40px;
+    height: 40px;
+
+    transition: color var(--smoothTransition);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--pageColor);
+    background: var(--btnHover);
+    outline-color: var(--outlineHover);
+    box-shadow: var(--BtnShadow);
+  }
 
   @media screen and (min-width: 1200px) {
-    max-width: 1024px;
     width: 30px;
     height: 30px;
   }
-}
-
-.done {
-  &:hover,
-  &:focus {
-    outline: 2px solid greenyellow;
-  }
-}
-.delete {
-}
-.add {
-}
-.exit {
 }

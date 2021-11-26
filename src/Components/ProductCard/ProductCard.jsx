@@ -30,7 +30,7 @@ const ProductCard = ({ name, price, img, alt, text }) => {
           <p className={s.description}>{text}</p>
         </div>
         <div className={s.actions}>
-          <Button className>
+          <Button>
             <FiCheck />
           </Button>
           <Button>

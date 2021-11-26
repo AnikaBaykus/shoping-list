@@ -1,9 +1,22 @@
 import React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from 'Components/ProductCard';
+import Button from 'Components/Button';
+import Modal from 'Components/Modal';
+import { BiPlusCircle } from 'react-icons/bi';
 import s from './ProductList.module.scss';
 
 const ProductList = ({ cards }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const openModal = event => {
+    toggleModal();
+  };
   return (
     <>
       <ul className={s.list}>
@@ -19,6 +32,12 @@ const ProductList = ({ cards }) => {
           </li>
         ))}
       </ul>
+      <div className={s.btnBlock}>
+        <Button className={s.addCard} onClickButton={openModal}>
+          <BiPlusCircle />
+        </Button>
+      </div>
+      {showModal && <Modal onCloseModal={toggleModal} showModal={showModal} />}
     </>
   );
 };
