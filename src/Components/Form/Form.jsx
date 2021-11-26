@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import s from './Form.module.scss';
 
 const Form = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const [result, setResult] = useState('');
+  const { register, handleSubmit } = useForm();
+  // const [result, setResult] = useState('');
   const onSubmit = data => {
     console.log(data);
     console.log(data.image);
@@ -31,7 +31,7 @@ const Form = () => {
           className={s.btn}
           {...register('image')}
           type="file"
-          name="picture"
+          name="image"
         />
         <textarea
           className={s.textarea}
