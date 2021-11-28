@@ -10,6 +10,7 @@ const Button = ({ children, className, onClickButton }) => {
         onClick={onClickButton}
         className={cn(className, s.button)}
         type="button"
+        // onChange=
       >
         {children}
       </button>

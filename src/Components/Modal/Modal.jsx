@@ -4,11 +4,11 @@ import { createPortal } from 'react-dom';
 import Button from 'Components/Button';
 import { BiX } from 'react-icons/bi';
 import s from './Modal.module.scss';
-import Form from 'Components/Form';
+import Form from '../../Components/Form/Form';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ onCloseModal }) => {
+const Modal = ({ onCloseModal, onSubmit }) => {
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.code === 'Escape') {
@@ -34,7 +34,7 @@ const Modal = ({ onCloseModal }) => {
         <Button className={s.closeModal} onClickButton={onCloseModal}>
           <BiX />
         </Button>
-        <Form />
+        <Form onSubmit={onSubmit} />
       </div>
     </div>,
     modalRoot,

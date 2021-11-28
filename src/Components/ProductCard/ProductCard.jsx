@@ -1,53 +1,87 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import s from './ProductCard.module.scss';
 import Button from 'Components/Button';
 // import s from 'Components/Button.module.scss';
 import { FiCheck, FiTrash2 } from 'react-icons/fi';
 
-const ProductCard = ({ name, price, img, alt, text }) => {
+const ProductCard = ({
+  name,
+  price,
+  img,
+  alt,
+  text,
+  status,
+  onDeleteProduct,
+  onBuyProduct,
+  id,
+}) => {
   return (
-    <div className={s.cardWrapper}>
-      <div className={s.card}>
-        <div className={s.product}>
-          <h3 className={s.name}>{name}</h3>
-          <div className={s.imageContainer}>
-            <img className={s.image} src={img} alt={alt} />
-          </div>
-        </div>
-        <div className={s.productInfo}>
-          <div className={s.info}>
-            <div>
-              <span>Цена:</span>
-            </div>
-            <div>
-              <span className={s.price}>
-                {price}
-                <span className={s.currency}>₽</span>
-              </span>
+    <div className={s.cardWrapper} key={id}>
+      {status ? (
+        <div className={s.cardBuy}>
+          <div className={s.product}>
+            <h3 className={s.name}>{name}</h3>
+            <div className={s.imageContainer}>
+              <img className={s.image} src={img} alt={alt} />
             </div>
           </div>
-          <p className={s.description}>{text}</p>
+          <div className={s.productInfo}>
+            <div className={s.info}>
+              <div>
+                <span>Цена:</span>
+              </div>
+              <div>
+                <span className={s.price}>
+                  {price}
+                  <span className={s.currency}>₽</span>
+                </span>
+              </div>
+            </div>
+            <p className={s.description}>{text}</p>
+          </div>
+          <div className={s.actions}>
+            <Button onClickButton={() => onBuyProduct(id)}>
+              <FiCheck />
+            </Button>
+            <Button onClickButton={() => onDeleteProduct(id)}>
+              <FiTrash2 />
+            </Button>
+          </div>
         </div>
-        <div className={s.actions}>
-          <Button>
-            <FiCheck />
-          </Button>
-          <Button>
-            <FiTrash2 />
-          </Button>
+      ) : (
+        <div className={s.card} key={id}>
+          <div className={s.product}>
+            <h3 className={s.name}>{name}</h3>
+            <div className={s.imageContainer}>
+              <img className={s.image} src={img} alt={alt} />
+            </div>
+          </div>
+          <div className={s.productInfo}>
+            <div className={s.info}>
+              <div>
+                <span>Цена:</span>
+              </div>
+              <div>
+                <span className={s.price}>
+                  {price}
+                  <span className={s.currency}>₽</span>
+                </span>
+              </div>
+            </div>
+            <p className={s.description}>{text}</p>
+          </div>
+          <div className={s.actions}>
+            <Button onClickButton={() => onBuyProduct(id)}>
+              <FiCheck />
+            </Button>
+            <Button onClickButton={() => onDeleteProduct(id)}>
+              <FiTrash2 />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
 export default ProductCard;
-
-ProductCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-};
