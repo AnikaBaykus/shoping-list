@@ -16,34 +16,45 @@ const ProductList = ({ cards, onDeleteProduct, onSubmit, onBuyProduct }) => {
     toggleModal();
   };
 
-  // const id = cards.map(card => card.id);
+  const availabilityOfCards = cards.length;
 
   return (
     <>
-      <ul className={s.list}>
-        {cards.map(
-          ({ id, name, price, description, alt, image = '', isBuy }) => (
-            <li key={id}>
-              <ProductCard
-                name={name}
-                price={price}
-                img={image}
-                alt={alt}
-                text={description}
-                status={isBuy}
-                onDeleteProduct={onDeleteProduct}
-                onBuyProduct={onBuyProduct}
-                id={id}
-              />
-            </li>
-          ),
-        )}
-      </ul>
       <div className={s.btnBlock}>
         <Button className={s.addCard} onClickButton={openModal}>
           <BiPlusCircle />
         </Button>
       </div>
+      {availabilityOfCards === 0 ? (
+        <h2>Вы ещё не добавили ни одного товара</h2>
+      ) : (
+        <ul className={s.list}>
+          {cards.map(
+            ({ id, name, price, description, alt, image = '', isBuy }) => (
+              <li key={id}>
+                <ProductCard
+                  name={name}
+                  price={price}
+                  img={image}
+                  alt={alt}
+                  text={description}
+                  status={isBuy}
+                  onDeleteProduct={onDeleteProduct}
+                  onBuyProduct={onBuyProduct}
+                  id={id}
+                />
+              </li>
+            ),
+          )}
+        </ul>
+      )}
+      {availabilityOfCards >= 2 && (
+        <div className={s.btnBlock}>
+          <Button className={s.addCard} onClickButton={openModal}>
+            <BiPlusCircle />
+          </Button>
+        </div>
+      )}
       {showModal && (
         <Modal
           onSubmit={onSubmit}

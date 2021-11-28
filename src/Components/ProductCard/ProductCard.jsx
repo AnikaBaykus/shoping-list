@@ -15,7 +15,6 @@ const ProductCard = ({
   onBuyProduct,
   id,
 }) => {
-  console.log('status = ', status);
   return (
     <div className={s.cardWrapper} key={id}>
       <div className={status ? s.cardBuy : s.card}>

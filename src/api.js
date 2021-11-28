@@ -1,4 +1,5 @@
 import { db } from './firebase';
+import { toast } from 'react-toastify';
 
 export function fetchProducts(collection) {
   return db
@@ -12,6 +13,7 @@ export function fetchProducts(collection) {
       return productsData;
     })
     .catch(error => {
+      toast.error('😰 Мы не смогли получить ни одной вашей карточки товара');
       console.log('Ошибка чтения базы из Api.js', error);
     });
 }
@@ -25,6 +27,7 @@ export function createProducts(data) {
       isBuy: false,
     })
     .then(docRef => {
+      toast.success('Товар успешно добавлен 😝');
       console.log('Document successfully written!', docRef.id);
       return docRef.get();
     })
@@ -33,6 +36,9 @@ export function createProducts(data) {
       ...doc.data(),
     }))
     .catch(error => {
+      toast.error(
+        '😰 Что-то пошло не так, попробуйте перезапустить приложение',
+      );
       console.error('Error writing document: ', error);
     });
 }

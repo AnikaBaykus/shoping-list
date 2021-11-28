@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ShoppingListViews from 'Views/ShoppingListViews';
 import Container from 'Components/Container';
 import Section from 'Components/Section';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import { db } from './firebase';
 
@@ -28,10 +30,6 @@ function App() {
     createProducts(data).then(product => {
       setProducts([...products, product]);
     });
-    const img = {
-      image,
-    };
-    console.log('Пришел документ:', img);
   };
 
   const deleteProduct = productId => {
@@ -40,14 +38,16 @@ function App() {
       .delete()
       .then(() => {
         console.log('Document successfully deleted!');
+        toast.success(' Добавили что-то лишнее 😬');
         setProducts(products.filter(product => product.id !== productId));
       })
       .catch(error => {
+        toast.error(
+          '😰 Что-то пошло не так, попробуйте перезапустить приложение 😵',
+        );
         console.error('Error removing document: ', error);
       });
   };
-
-  console.log('products = ', products);
 
   const buyProduct = productId => {
     const product = products.find(el => el.id === productId);
@@ -59,6 +59,7 @@ function App() {
         isBuy: !product.isBuy,
       })
       .then(() => {
+        toast.info('Отметили');
         console.log('Document successfully updated!');
         const newProducts = products.map(el => {
           if (el.id === productId) {
@@ -72,6 +73,9 @@ function App() {
         setProducts(newProducts);
       })
       .catch(error => {
+        toast.error(
+          '😰 Что-то пошло не так, попробуйте перезапустить приложение 😵',
+        );
         console.error('Error updating document: ', error);
       });
   };
@@ -90,6 +94,18 @@ function App() {
           />
         </Section>
       </Container>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

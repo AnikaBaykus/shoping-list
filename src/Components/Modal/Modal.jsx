@@ -34,7 +34,7 @@ const Modal = ({ onCloseModal, onSubmit }) => {
         <Button className={s.closeModal} onClickButton={onCloseModal}>
           <BiX />
         </Button>
-        <Form onSubmit={onSubmit} />
+        <Form onSubmit={onSubmit} onCloseModal={onCloseModal} />
       </div>
     </div>,
     modalRoot,

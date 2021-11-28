@@ -32,7 +32,8 @@
   outline: var(--outlineColor);
   border: var(--borderColor);
   border-radius: 5px;
-  background-color: grey;
+  background-color: #c8c8c880;
+  text-decoration: line-through;
 
   @media screen and (min-width: 768px) {
     min-height: 204px;

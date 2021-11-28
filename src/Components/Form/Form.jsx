@@ -4,16 +4,16 @@ import { useState } from 'react';
 import s from './Form.module.scss';
 import { storage, storageRef } from '../../firebase';
 
-const Form = ({ onSubmit }) => {
+const Form = ({ onSubmit, onCloseModal }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
 
   const resetForm = () => {
     setName('');
     setPrice('');
-    setImage(null);
+    setImage('');
     setDescription('');
   };
 
@@ -52,6 +52,7 @@ const Form = ({ onSubmit }) => {
           .then(url => {
             onSubmit(name, price, image, description, url);
             resetForm();
+            onCloseModal();
           });
       },
     );
