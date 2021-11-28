@@ -8,7 +8,6 @@ const Form = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
-  const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
 
   const resetForm = () => {
@@ -31,7 +30,13 @@ const Form = ({ onSubmit }) => {
     }
     // setImage(event.currentTarget.value);
   };
-  const hendleUpload = () => {
+
+  const handleChangeDescription = event => {
+    setDescription(event.currentTarget.value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
     const uploadImg = storage.ref(`images/${image.name}`).put(image);
     uploadImg.on(
       'shopping-list',
@@ -45,21 +50,11 @@ const Form = ({ onSubmit }) => {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            setUrl(url);
+            onSubmit(name, price, image, description, url);
+            resetForm();
           });
       },
     );
-  };
-
-  const handleChangeDescription = event => {
-    setDescription(event.currentTarget.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    onSubmit(name, price, image, description, url);
-    resetForm();
   };
 
   return (
@@ -99,7 +94,7 @@ const Form = ({ onSubmit }) => {
           placeholder="Описание"
           maxLength="150"
         ></textarea>
-        <input className={s.btn} type="submit" onClick={hendleUpload} />
+        <input className={s.btn} type="submit" />
       </form>
     </>
   );

@@ -47,26 +47,33 @@ function App() {
       });
   };
 
+  console.log('products = ', products);
+
   const buyProduct = productId => {
-    products.find(product => {
-      if (product.id === productId) {
-        db.collection('shopping-list')
-          .doc(`${productId}`)
-          .update({
-            isBuy: !product.isBuy,
-          })
-          .then(() => {
-            console.log('Document successfully updated!');
-          })
-          .then(product => {
-            setProducts([...product, ...products]);
-          })
-          .catch(error => {
-            console.error('Error updating document: ', error);
-          });
-      }
-    });
-    // console.log(card);
+    const product = products.find(el => el.id === productId);
+    if (!product) return;
+
+    db.collection('shopping-list')
+      .doc(`${productId}`)
+      .update({
+        isBuy: !product.isBuy,
+      })
+      .then(() => {
+        console.log('Document successfully updated!');
+        const newProducts = products.map(el => {
+          if (el.id === productId) {
+            return {
+              ...el,
+              isBuy: !el.isBuy,
+            };
+          }
+          return el;
+        });
+        setProducts(newProducts);
+      })
+      .catch(error => {
+        console.error('Error updating document: ', error);
+      });
   };
 
   return (

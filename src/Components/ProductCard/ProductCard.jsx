@@ -15,71 +15,39 @@ const ProductCard = ({
   onBuyProduct,
   id,
 }) => {
+  console.log('status = ', status);
   return (
     <div className={s.cardWrapper} key={id}>
-      {status ? (
-        <div className={s.cardBuy}>
-          <div className={s.product}>
-            <h3 className={s.name}>{name}</h3>
-            <div className={s.imageContainer}>
-              <img className={s.image} src={img} alt={alt} />
-            </div>
-          </div>
-          <div className={s.productInfo}>
-            <div className={s.info}>
-              <div>
-                <span>Цена:</span>
-              </div>
-              <div>
-                <span className={s.price}>
-                  {price}
-                  <span className={s.currency}>₽</span>
-                </span>
-              </div>
-            </div>
-            <p className={s.description}>{text}</p>
-          </div>
-          <div className={s.actions}>
-            <Button onClickButton={() => onBuyProduct(id)}>
-              <FiCheck />
-            </Button>
-            <Button onClickButton={() => onDeleteProduct(id)}>
-              <FiTrash2 />
-            </Button>
+      <div className={status ? s.cardBuy : s.card}>
+        <div className={s.product}>
+          <h3 className={s.name}>{name}</h3>
+          <div className={s.imageContainer}>
+            <img className={s.image} src={img} alt={alt} />
           </div>
         </div>
-      ) : (
-        <div className={s.card} key={id}>
-          <div className={s.product}>
-            <h3 className={s.name}>{name}</h3>
-            <div className={s.imageContainer}>
-              <img className={s.image} src={img} alt={alt} />
+        <div className={s.productInfo}>
+          <div className={s.info}>
+            <div>
+              <span>Цена:</span>
+            </div>
+            <div>
+              <span className={s.price}>
+                {price}
+                <span className={s.currency}>₽</span>
+              </span>
             </div>
           </div>
-          <div className={s.productInfo}>
-            <div className={s.info}>
-              <div>
-                <span>Цена:</span>
-              </div>
-              <div>
-                <span className={s.price}>
-                  {price}
-                  <span className={s.currency}>₽</span>
-                </span>
-              </div>
-            </div>
-            <p className={s.description}>{text}</p>
-          </div>
-          <div className={s.actions}>
-            <Button onClickButton={() => onBuyProduct(id)}>
-              <FiCheck />
-            </Button>
-            <Button onClickButton={() => onDeleteProduct(id)}>
-              <FiTrash2 />
-            </Button>
-          </div>
+          <p className={s.description}>{text}</p>
         </div>
-      )}
+        <div className={s.actions}>
+          <Button onClickButton={() => onBuyProduct(id)}>
+            <FiCheck />
+          </Button>
+          <Button onClickButton={() => onDeleteProduct(id)}>
+            <FiTrash2 />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
